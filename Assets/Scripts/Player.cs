@@ -54,4 +54,60 @@ public class Player : MonoBehaviour
             UnityEngine.Debug.Log("GameOver");
         }
     }
+
+    //heals player after picking up health
+    private void pickupHealth()
+    {
+        health += 50;
+        if(health > 200)
+        {
+            health = 200;
+        }
+    }
+
+    //adds armour after picking up armour powerup
+    private void pickupArmor()
+    {
+        armor += 15;
+    }
+
+    //adds ammo
+    private void pickupAssaultRifleAmmo()
+    {
+        ammo.AddAmmo(Constants.AssaultRifle, 50);
+    }
+    private void pickupPistolAmmo()
+    {
+        ammo.AddAmmo(Constants.Pistol, 20);
+    }
+    private void pickupShotgunAmmo()
+    {
+        ammo.AddAmmo(Constants.Shotgun, 10);
+    }
+
+    //add armor/health/ammo when player picks them up
+    public void PickUpItem(int pickupType)
+    {
+        switch (pickupType)
+        {
+            case Constants.PickUpArmor:
+                pickupArmor();
+                break;
+            case Constants.PickUpHealth:
+                pickupHealth();
+                break;
+            case Constants.PickUpAssaultRifleAmmo:
+                pickupAssaultRifleAmmo();
+                break;
+            case Constants.PickUpPistolAmmo:
+                pickupPistolAmmo();
+                break;
+            case Constants.PickUpShotgunAmmo:
+                pickupShotgunAmmo();
+                break;
+            default:
+                UnityEngine.Debug.LogError("Bad pickup type passed" + pickupType);
+                break;
+        }
+    }
 }
