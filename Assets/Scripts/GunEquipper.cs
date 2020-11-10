@@ -18,6 +18,9 @@ public class GunEquipper : MonoBehaviour
     //currently equipped gun
     GameObject activeGun;
 
+    [SerializeField]
+    Ammo ammo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +61,8 @@ public class GunEquipper : MonoBehaviour
         //enables gun the player wants to switch to
         weapon.SetActive(true);
         activeGun = weapon;
+
+        gameUI.SetAmmoText(ammo.GetAmmo(activeGun.tag));
     }
 
     public GameObject GetActiveWeapon()
