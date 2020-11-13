@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Game game;
+    public AudioClip playerDead;
     public int health;
     public int armor;
     public GameUI gameUI;
@@ -53,7 +55,8 @@ public class Player : MonoBehaviour
         //if player runs out of health, game over
         if(health <= 0)
         {
-            UnityEngine.Debug.Log("GameOver");
+            GetComponent<AudioSource>().PlayOneShot(playerDead);
+            game.GameOver();
         }
     }
 

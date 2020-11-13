@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
+    //vars for UI
     public GameUI gameUI;
     public GameObject player;
     public int score;
     public int waveCountdown;
     public bool isGameOver;
+    public GameObject gameOverPanel;
 
     private static Game singleton;
 
@@ -52,11 +56,12 @@ public class Game : MonoBehaviour
     {
         while(!isGameOver)
         {
+            //wait until a certain time to spawn next wave
             yield return new WaitForSeconds(1f);
             waveCountdown--;
             gameUI.SetWaveText(waveCountdown);
 
-            //spawn next wave and restart count down
+            //spawn next wave and restart countdown
             if(waveCountdown == 0)
             {
                 SpawnRobots();
@@ -79,12 +84,14 @@ public class Game : MonoBehaviour
         }
     }
 
+    //add score after killing enemy
     public void AddRobotKillToScore()
     {
         score += 10;
         gameUI.SetScoreText(score);
     }
 
+    //add score for each second the player survives
     IEnumerator increaseScoreEachSecond()
     {
         while(!isGameOver)
@@ -93,5 +100,44 @@ public class Game : MonoBehaviour
             score += 1;
             gameUI.SetScoreText(score);
         }
+    }
+
+    //enables players cursor when the game is over
+    public void OnGUI()
+    {
+        if(isGameOver && Cursor.visible == false)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    //pauses the game when the player loses
+    public void GameOver()
+    {
+        isGameOver = true;
+        Time.timeScale = 0;
+        player.GetComponent<FirstPersonController>().enabled = false;
+        player.GetComponent<CharacterController>().enabled = false;
+        gameOverPanel.SetActive(true);
+    }
+
+    //reload the game when player clicks the restart button
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(Constants.SceneBattle);
+        gameOverPanel.SetActive(true);
+    }
+
+    //quits the application when the player clicks the exit button
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
+    //goes back to the main menu when the player clicks the menu button
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(Constants.SceneMenu);
     }
 }
