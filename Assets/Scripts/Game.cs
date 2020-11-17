@@ -44,11 +44,13 @@ public class Game : MonoBehaviour
     //spawn enemies
     private void SpawnRobots()
     {
+        //spawn an enemy at each spawn point
         foreach (RobotSpawn spawn in spawns)
         {
             spawn.SpawnRobot();
             enemiesLeft++;
         }
+        //update UI
         gameUI.SetEnemyText(enemiesLeft);
     }
 
@@ -73,6 +75,7 @@ public class Game : MonoBehaviour
 
     public static void RemoveEnemy()
     {
+        //update enemiesLeft var and UI when an enemy is killed
         singleton.enemiesLeft--;
         singleton.gameUI.SetEnemyText(singleton.enemiesLeft);
 
