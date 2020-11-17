@@ -45,6 +45,13 @@ public class Gun : MonoBehaviour
         {
             GetComponent<AudioSource>().PlayOneShot(liveFire);
             ammo.ConsumeAmmo(tag);
+
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, range))
+            {
+                processHit(hit.collider.gameObject);
+            }
         }
         else
         {
@@ -52,12 +59,7 @@ public class Gun : MonoBehaviour
         }
         GetComponentInChildren<Animator>().Play("Fire");
 
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, range))
-        {
-            processHit(hit.collider.gameObject);
-        }
+
     }
 
     private void processHit(GameObject hitObject)

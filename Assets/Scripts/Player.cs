@@ -109,6 +109,15 @@ public class Player : MonoBehaviour
             gameUI.SetAmmoText(ammo.GetAmmo(Constants.Shotgun));
         }
     }
+    private void pickupRocketAmmo()
+    {
+        ammo.AddAmmo(Constants.Rocket, 2);
+        gameUI.SetPickupText("Rocket ammo picked up +2 ammo");
+        if (gunEquipper.GetActiveWeapon().tag == Constants.Rocket)
+        {
+            gameUI.SetAmmoText(ammo.GetAmmo(Constants.Rocket));
+        }
+    }
 
     //add armor/health/ammo when player picks them up
     public void PickUpItem(int pickupType)
@@ -129,6 +138,9 @@ public class Player : MonoBehaviour
                 break;
             case Constants.PickUpShotgunAmmo:
                 pickupShotgunAmmo();
+                break;
+            case Constants.PickUpRocketAmmo:
+                pickupRocketAmmo();
                 break;
             default:
                 UnityEngine.Debug.LogError("Bad pickup type passed" + pickupType);

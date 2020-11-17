@@ -14,6 +14,7 @@ public class GunEquipper : MonoBehaviour
     public GameObject pistol;
     public GameObject assaultRifle;
     public GameObject shotgun;
+    public GameObject rocket;
 
     //currently equipped gun
     GameObject activeGun;
@@ -49,6 +50,12 @@ public class GunEquipper : MonoBehaviour
             activeWeaponType = Constants.Shotgun;
             gameUI.UpdateReticle();
         }
+        else if (Input.GetKeyDown("4"))
+        {
+            loadWeapon(rocket);
+            activeWeaponType = Constants.Rocket;
+            gameUI.UpdateReticle();
+        }
     }
 
     private void loadWeapon(GameObject weapon)
@@ -57,6 +64,7 @@ public class GunEquipper : MonoBehaviour
         pistol.SetActive(false);
         assaultRifle.SetActive(false);
         shotgun.SetActive(false);
+        rocket.SetActive(false);
 
         //enables gun the player wants to switch to
         weapon.SetActive(true);

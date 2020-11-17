@@ -13,7 +13,9 @@ public class Ammo : MonoBehaviour
     [SerializeField]
     private int shotgunAmmo = 10;
     [SerializeField]
-    private int assaultRifleAmmo = 50;
+    private int assaultRifleAmmo = 50; 
+    [SerializeField]
+    private int rocketAmmo = 5;
 
     public Dictionary<string, int> tagToAmmo;
 
@@ -36,6 +38,7 @@ public class Ammo : MonoBehaviour
             {Constants.Pistol , pistolAmmo },
             {Constants.Shotgun , shotgunAmmo },
             {Constants.AssaultRifle , assaultRifleAmmo },
+            {Constants.Rocket , rocketAmmo },
         };
     }
 

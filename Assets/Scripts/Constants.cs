@@ -12,6 +12,7 @@ public class Constants
     public const string Pistol = "Pistol";
     public const string Shotgun = "Shotgun";
     public const string AssaultRifle = "AssaultRifle";
+    public const string Rocket = "Rocket";
 
     //Robot types
     public const string RedRobot = "RedRobot";
@@ -24,17 +25,19 @@ public class Constants
     public const int PickUpShotgunAmmo = 3;
     public const int PickUpHealth = 4;
     public const int PickUpArmor = 5;
+    public const int PickUpRocketAmmo = 6;
 
     //Misc
     public const string Game = "Game";
     public const float CameraDefaultZoom = 60f;
 
-    public static readonly int[] AllPickupTypes = new int[5]
+    public static readonly int[] AllPickupTypes = new int[6]
     {
         PickUpPistolAmmo,
         PickUpAssaultRifleAmmo,
         PickUpShotgunAmmo,
         PickUpHealth,
-        PickUpArmor
+        PickUpArmor,
+        PickUpRocketAmmo
     };
 }
